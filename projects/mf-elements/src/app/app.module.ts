@@ -1,18 +1,27 @@
-import { NgModule } from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { Platform } from '@angular/cdk/platform';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { HomeModule } from './elements/home/home.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+
+    HomeModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
+  providers: [
+    {
+      provide: APP_BASE_HREF,
+      useValue: '/'
+    },
+    Platform
+  ]
 })
-export class AppModule { }
+export class AppModule {
+  ngDoBootstrap() { }
+}
